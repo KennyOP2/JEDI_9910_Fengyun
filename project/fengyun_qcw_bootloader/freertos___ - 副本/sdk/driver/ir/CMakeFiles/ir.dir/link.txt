@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libir.a  CMakeFiles/ir.dir/mmp_ir.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libir.a

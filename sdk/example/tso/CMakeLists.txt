@@ -1,0 +1,63 @@
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    SET(EXAMPLE_LINK_LIBS
+        winmm
+    )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    SET(EXAMPLE_LINK_DIRS
+        ${PROJECT_BINARY_DIR}/${SMEDIA_PLATFORM}
+    )
+    SET(EXAMPLE_LINK_LIBS
+        ${SMEDIA_PLATFORM}
+    )
+ENDIF()
+
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${PROJECT_SOURCE_DIR}/sdk/driver/modulator
+)
+
+ADD_EXECUTABLE(tsotest
+    main.c
+)
+
+LINK_DIRECTORIES(
+    ${PROJECT_BINARY_DIR}/tso
+    ${PROJECT_BINARY_DIR}/tsi    
+    ${PROJECT_BINARY_DIR}/pal
+    ${PROJECT_BINARY_DIR}/mmp
+    #${PROJECT_BINARY_DIR}/${SMEDIA_FAT_LIB}
+    ${EXAMPLE_LINK_DIRS}
+)
+
+TARGET_LINK_LIBRARIES(tsotest
+    tsi
+    tso
+    eagle_modulator
+    pal
+    ${SMEDIA_FAT_LIB}
+    mmp  
+    iic  
+    ${EXAMPLE_LINK_LIBS}
+)
+
+IF(${SMEDIA_PLATFORM} STREQUAL openrtos)
+    TARGET_LINK_LIBRARIES(tsotest
+        ith
+        ${EXAMPLE_LINK_LIBS}
+    )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos)
+    TARGET_LINK_LIBRARIES(tsotest
+        intr
+        ${EXAMPLE_LINK_LIBS}
+    )
+ENDIF()
+
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    ADD_CUSTOM_COMMAND(
+        TARGET tsotest
+        POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY}
+            -O binary ${CMAKE_CURRENT_BINARY_DIR}/tsotest ${CMAKE_CURRENT_BINARY_DIR}/tsotest.bin
+    )
+ENDIF()

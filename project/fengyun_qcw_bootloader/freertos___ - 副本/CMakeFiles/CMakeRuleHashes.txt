@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+d13bb3eea6253ddb20081b0e11c3b517 freertos/src/startup/CMakeFiles/default.ld
+d13bb3eea6253ddb20081b0e11c3b517 freertos/src/startup/CMakeFiles/or32_crt0
+72d531326a283e93de0683956f70c270 lib/codec_crt0.o
+e124fbd4afa2ed8b0a6f2afdd1f55ed8 lib/codecs.ld
+6e1043f1a143716dfc9b56e729919e60 lib/default.ld
+4a395a113a62c3c4391dbbe94cd66ce5 lib/or32_crt0.o
+cc703dce062a6de8b77a197bbace882e project/fengyun_fy283_bootloader/CMakeFiles/default.ld
+dc4115cf7bf051ee919f43939554dacb sdk/codecs/CMakeFiles/codec_crt0
+dc4115cf7bf051ee919f43939554dacb sdk/codecs/CMakeFiles/codecs.ld

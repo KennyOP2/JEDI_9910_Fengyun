@@ -1,0 +1,14 @@
+info IT9910 Jedi
+
+mcu IT9910
+family 580
+ram_size 0x800000
+ram_base 0x800000
+osc 32768
+init_script ..\..\tool\target\IT9919_A1_Initial_DDR2_Mem_notiling_440MHZ.txt
+outbuf_addr 0xC0
+outbuf_size_addr 0xC4
+outbuf_index_addr 0xC8
+inbuf_addr 0xCC
+inbuf_size_addr 0xD0
+inbuf_index_addr 0xD4

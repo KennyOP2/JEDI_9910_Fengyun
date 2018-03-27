@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libjpg.a  CMakeFiles/jpg.dir/jpg_common.c.obj CMakeFiles/jpg.dir/jpg_encode.c.obj CMakeFiles/jpg.dir/jpg_hw.c.obj CMakeFiles/jpg.dir/jpg_marker.c.obj CMakeFiles/jpg.dir/mmp_jpg.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libjpg.a

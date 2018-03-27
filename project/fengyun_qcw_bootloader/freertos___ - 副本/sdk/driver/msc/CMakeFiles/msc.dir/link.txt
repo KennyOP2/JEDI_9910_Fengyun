@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libmsc.a  CMakeFiles/msc.dir/usb.c.obj CMakeFiles/msc.dir/transport.c.obj CMakeFiles/msc.dir/scsi.c.obj CMakeFiles/msc.dir/mmp_msc.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libmsc.a

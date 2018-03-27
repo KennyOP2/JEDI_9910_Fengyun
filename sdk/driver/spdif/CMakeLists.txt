@@ -1,0 +1,22 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DSPDIF_EXPORTS
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(spdif
+    mmp_spdif.c
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(spdif
+        mmp
+        dma
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

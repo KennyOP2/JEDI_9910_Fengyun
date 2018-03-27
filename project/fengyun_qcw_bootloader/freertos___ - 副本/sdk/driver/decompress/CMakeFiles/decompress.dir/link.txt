@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libdecompress.a  CMakeFiles/decompress.dir/mmp_decompress.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libdecompress.a

@@ -1,0 +1,20 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+)
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DTSI_EXPORTS
+    )
+ENDIF()
+
+ADD_LIBRARY(tsi
+    tsi.c
+)
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(tsi
+        mmp
+        pal
+    )
+ENDIF()

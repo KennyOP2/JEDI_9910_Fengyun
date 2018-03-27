@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libdpu.a  CMakeFiles/dpu.dir/mmp_dpu.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libdpu.a

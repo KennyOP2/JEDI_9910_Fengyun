@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libtsi.a  CMakeFiles/tsi.dir/tsi.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libtsi.a

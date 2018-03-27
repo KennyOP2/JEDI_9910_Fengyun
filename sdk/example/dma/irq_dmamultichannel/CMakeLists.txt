@@ -1,0 +1,46 @@
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    SET(EXAMPLE_LINK_DIRS
+        ${PROJECT_BINARY_DIR}/${SMEDIA_PLATFORM}
+        )
+    SET(EXAMPLE_LINK_LIBS
+        ${SMEDIA_PLATFORM}
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+
+ADD_EXECUTABLE(irq_dmamultichannel
+    main.c
+    )
+
+LINK_DIRECTORIES(
+    ${PROJECT_BINARY_DIR}/dma
+    ${PROJECT_BINARY_DIR}/mmp
+    ${EXAMPLE_LINK_DIRS}
+    )
+
+TARGET_LINK_LIBRARIES(irq_dmamultichannel
+    dma
+    mmp
+    ${EXAMPLE_LINK_LIBS}
+    )
+    
+IF(${SMEDIA_PLATFORM} STREQUAL freertos)
+TARGET_LINK_LIBRARIES(irq_dmamultichannel
+    intr
+    )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos)
+
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    ADD_CUSTOM_COMMAND(
+        TARGET irq_dmamultichannel
+        POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY}
+            -O binary ${CMAKE_CURRENT_BINARY_DIR}/irq_dmamultichannel ${CMAKE_CURRENT_BINARY_DIR}/irq_dmamultichannel.bin
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)

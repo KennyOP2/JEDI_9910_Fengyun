@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libsd.a  CMakeFiles/sd.dir/mmp_sd.c.obj CMakeFiles/sd.dir/sd_hw.c.obj CMakeFiles/sd.dir/sd.c.obj CMakeFiles/sd.dir/mmc.c.obj CMakeFiles/sd.dir/common.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libsd.a

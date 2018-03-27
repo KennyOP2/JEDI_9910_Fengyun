@@ -1,0 +1,21 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DDECOMPRESS_EXPORTS
+        )
+        
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(decompress STATIC
+    mmp_decompress.c
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(decompress
+        mmp
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

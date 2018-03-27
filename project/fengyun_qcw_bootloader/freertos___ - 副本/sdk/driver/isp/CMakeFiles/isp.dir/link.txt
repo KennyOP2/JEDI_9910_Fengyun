@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libisp.a  CMakeFiles/isp.dir/isp.c.obj CMakeFiles/isp.dir/isp_hw.c.obj CMakeFiles/isp.dir/isp_util.c.obj CMakeFiles/isp.dir/mmp_isp.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libisp.a

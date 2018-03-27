@@ -1,0 +1,6 @@
+ADD_SUBDIRECTORY(src/newlib)
+ADD_SUBDIRECTORY(src/or32)
+ADD_SUBDIRECTORY(src/freertos)
+ADD_SUBDIRECTORY(src/startup)
+ADD_SUBDIRECTORY(src/pal)
+ADD_SUBDIRECTORY(src/malloc)

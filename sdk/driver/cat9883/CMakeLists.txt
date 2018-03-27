@@ -1,0 +1,28 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DCAT9883_EXPORTS
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(cat9883
+    cat9883_adc.c
+    cat9883_mcu.c
+    mmp_cat9883.c
+    )
+
+TARGET_LINK_LIBRARIES(cat9883
+	pal
+	iic
+	)
+	
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(cat9883
+        mmp
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

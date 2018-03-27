@@ -1,0 +1,66 @@
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    SET(EXAMPLE_LINK_LIBS
+        winmm
+        )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    SET(EXAMPLE_LINK_DIRS
+        ${PROJECT_BINARY_DIR}/${SMEDIA_PLATFORM}
+        )
+    SET(EXAMPLE_LINK_LIBS
+        ${SMEDIA_PLATFORM}
+        )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+
+ADD_EXECUTABLE(pwntimertest
+    test_timer.c
+    )
+
+LINK_DIRECTORIES(
+    ${PROJECT_BINARY_DIR}/pal
+    ${PROJECT_BINARY_DIR}/mmp
+    ${PROJECT_BINARY_DIR}/bl
+    ${PROJECT_BINARY_DIR}/timer
+    ${EXAMPLE_LINK_DIRS}
+    )
+
+IF(${SYSTEM_FAT_TYPE} STREQUAL HAVE_FAT)
+    SET(SMEDIA_FAT_LIB
+        fat
+        msc
+        )
+ENDIF(${SYSTEM_FAT_TYPE} STREQUAL HAVE_FAT)
+
+TARGET_LINK_LIBRARIES(pwntimertest
+    pal
+    ${SMEDIA_FAT_LIB}
+    mmp
+    timer
+    ${EXAMPLE_LINK_LIBS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL openrtos)
+TARGET_LINK_LIBRARIES(pwntimertest
+    ith
+    ${EXAMPLE_LINK_LIBS}
+    )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos)
+TARGET_LINK_LIBRARIES(pwntimertest
+    intr
+    ${EXAMPLE_LINK_LIBS}
+    )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL openrtos)
+
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    ADD_CUSTOM_COMMAND(
+        TARGET pwntimertest
+        POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY}
+            -O binary ${CMAKE_CURRENT_BINARY_DIR}/pwntimertest ${CMAKE_CURRENT_BINARY_DIR}/pwntimertest.bin
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)

@@ -1,0 +1,46 @@
+INCLUDES = -I$(top_srcdir)/sdk/example/nandflash/src/share \
+           -I$(top_srcdir)/sdk/share/src/fat/src/common \
+           -I$(top_srcdir)/sdk/share/src/fat/src/ \
+           -I$(top_srcdir)/sdk/share/src/fat/src/ftl\src \
+           -I$(top_srcdir)/sdk/include/nandflash \
+           -I@top_srcdir@/sdk/include
+
+bin_PROGRAMS = ex_nandflash_test blob
+
+AM_CPPFLAGS = -I@top_srcdir@/or32/include \
+              -I@top_srcdir@/freertos/include \
+              -I@top_srcdir@/sdk/share/include \
+              -I@top_srcdir@/sdk/include \
+              -I@top_srcdir@/extra_lib \
+              -I$(top_srcdir)/sdk/example/nandflash/src/share
+
+AM_LDFLAGS = -T@top_builddir@/or32/startup/default.ld -nostartfiles
+
+ex_nandflash_test_SOURCES = ../share/freertos/lcdwindow.c \
+                      ../share/freertos/main.c \
+                      nandflash.c \
+                      test/test_f.c \
+                      test/testdrv_f.c \
+                      test/testport_f.c
+
+ex_nandflash_test_LDADD = @top_builddir@/apps/dpf/pal/libpal.a \
+                   @top_builddir@/sdk/libmmp.a \
+                   @top_builddir@/freertos/src/libfreertos.a \
+                   @top_builddir@/or32/startup/or32_crt0.o \
+                   @top_builddir@/or32/sys/or32_init.o \
+                   @top_builddir@/or32/sys/or32_isr.o \
+                   @top_builddir@/or32/sys/or32_sys.o \
+                   @top_builddir@/or32/sys/or32_uart.o \
+                   @top_builddir@/or32/sys/or32_stdio.o \
+                   @top_builddir@/or32/sys/or32_sbrk.o
+
+
+ex_nandflash_test_DEPENDENCIES = $(ex_nandflash_test_LDADD)
+
+blob: ex_nandflash_test.bin
+
+%.bin: %
+	or32-elf-objcopy -O binary $< $@
+	or32-elf-readelf -a $< > $<.symbol
+	ls -lh $@
+

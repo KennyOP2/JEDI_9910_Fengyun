@@ -1,0 +1,10 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+ADD_LIBRARY(or32
+    or32_init.c
+    or32_isr.c
+    or32_sys.c
+    or32_uart.c
+    or32_stdio.c
+    )

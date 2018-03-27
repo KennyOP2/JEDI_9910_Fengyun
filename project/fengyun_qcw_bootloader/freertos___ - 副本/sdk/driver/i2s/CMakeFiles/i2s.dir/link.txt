@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libi2s.a  CMakeFiles/i2s.dir/i2s_9910.c.obj CMakeFiles/i2s.dir/codec_wm8960.c.obj CMakeFiles/i2s.dir/transceiver_wm8804.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libi2s.a

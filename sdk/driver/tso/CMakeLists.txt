@@ -1,0 +1,22 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DTSO_EXPORTS
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(tso
+    tso.c
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(tso
+        mmp
+        pal
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

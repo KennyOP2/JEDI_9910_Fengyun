@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libpal.a  CMakeFiles/pal.dir/error.c.obj CMakeFiles/pal.dir/event.c.obj CMakeFiles/pal.dir/file.c.obj CMakeFiles/pal.dir/heap.c.obj CMakeFiles/pal.dir/init.c.obj CMakeFiles/pal.dir/msgq.c.obj CMakeFiles/pal.dir/mutex.c.obj CMakeFiles/pal.dir/print.c.obj CMakeFiles/pal.dir/rand.c.obj CMakeFiles/pal.dir/stat.c.obj CMakeFiles/pal.dir/string.c.obj CMakeFiles/pal.dir/thread.c.obj CMakeFiles/pal.dir/timer.c.obj CMakeFiles/pal.dir/sys.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libpal.a

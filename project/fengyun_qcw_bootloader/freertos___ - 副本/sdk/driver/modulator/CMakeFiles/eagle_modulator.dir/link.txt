@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libeagle_modulator.a  CMakeFiles/eagle_modulator.dir/IT9507/modulatorUser.cpp.obj CMakeFiles/eagle_modulator.dir/IT9507/IT9507.cpp.obj CMakeFiles/eagle_modulator.dir/IT9507/eagleTuner.cpp.obj CMakeFiles/eagle_modulator.dir/usb_mod/usb_mod.c.obj CMakeFiles/eagle_modulator.dir/usb_mod/usb_mod_transport.c.obj CMakeFiles/eagle_modulator.dir/mod_ctrl.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libeagle_modulator.a

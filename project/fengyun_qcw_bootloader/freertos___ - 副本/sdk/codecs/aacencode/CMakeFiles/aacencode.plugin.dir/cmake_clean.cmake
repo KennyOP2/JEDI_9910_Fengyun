@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/aacencode.plugin.dir/aac_rom.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/aacenc.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/aac-enc.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/aacenc_core.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/adj_thr.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/band_nrg.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/basicop2.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/bit_cnt.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/bitbuffer.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/bitenc.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/block_switch.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/channel_map.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/cmnMemory.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/dyn_bits.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/grp_data.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/interface.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/line_pe.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/memalign.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/ms_stereo.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/oper_32b.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/pre_echo_control.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/psy_configuration.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/psy_main.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/qc_main.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/quantize.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/sf_estim.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/spreading.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/stat_bits.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/tns.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/transform.c.obj"
+  "CMakeFiles/aacencode.plugin.dir/resample2.c.obj"
+  "aacencode.plugin.pdb"
+  "aacencode.plugin"
+  "aacencode.plugin.manifest"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/aacencode.plugin.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libencoder.a  CMakeFiles/encoder.dir/mmp_encoder.c.obj CMakeFiles/encoder.dir/encoder_memory.c.obj CMakeFiles/encoder.dir/encoder_hardware.c.obj CMakeFiles/encoder.dir/encoder_bitstream.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libencoder.a

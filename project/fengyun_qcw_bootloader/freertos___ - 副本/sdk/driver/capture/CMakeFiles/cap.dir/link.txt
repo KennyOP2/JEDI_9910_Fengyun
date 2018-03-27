@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libcap.a  CMakeFiles/cap.dir/mmp_capture.c.obj CMakeFiles/cap.dir/capture_hw.c.obj CMakeFiles/cap.dir/capture.c.obj CMakeFiles/cap.dir/cap_util.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libcap.a

@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libfat.a  CMakeFiles/fat.dir/common/fat.c.obj CMakeFiles/fat.dir/common/fat_lfn.c.obj CMakeFiles/fat.dir/common/fat_m.c.obj CMakeFiles/fat.dir/common/port_f.c.obj CMakeFiles/fat.dir/common/common.c.obj CMakeFiles/fat.dir/mmc/single/mmc_smedia.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libfat.a

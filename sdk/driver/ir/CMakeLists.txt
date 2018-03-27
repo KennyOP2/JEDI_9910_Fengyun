@@ -1,0 +1,21 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DIR_EXPORTS
+        )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(ir
+    mmp_ir.c
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(ir
+        mmp  
+        pal    
+        dma
+        )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

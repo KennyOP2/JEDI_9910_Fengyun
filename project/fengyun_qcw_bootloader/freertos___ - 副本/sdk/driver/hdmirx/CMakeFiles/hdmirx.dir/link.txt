@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libhdmirx.a  CMakeFiles/hdmirx.dir/it6607/csc.c.obj CMakeFiles/hdmirx.dir/it6607/io.c.obj CMakeFiles/hdmirx.dir/it6607/timerprocess.c.obj CMakeFiles/hdmirx.dir/it6607/it6607.c.obj CMakeFiles/hdmirx.dir/it6607/mmp_it6607.c.obj CMakeFiles/hdmirx.dir/mmp_hdmirx.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libhdmirx.a

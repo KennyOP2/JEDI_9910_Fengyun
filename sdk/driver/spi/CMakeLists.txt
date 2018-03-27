@@ -1,0 +1,24 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    ${PROJECT_SOURCE_DIR}/sdk/include/nor
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    ADD_DEFINITIONS(
+        -DSPI_EXPORTS
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+ADD_LIBRARY(spi
+    mmp_spi.c
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    TARGET_LINK_LIBRARIES(spi
+        mmp
+        pal
+        dma
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)

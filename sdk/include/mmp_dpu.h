@@ -1,0 +1,332 @@
+/*
+ * Copyright (c) 2011 ite Corp. All Rights Reserved.
+ */
+/** @file
+ * Header file of DPU functions.
+ *
+ */
+ 
+#ifndef MMP_DPU_H
+#define MMP_DPU_H
+
+/*
+#include "nandflash/configs.h"
+#include "mmp_types.h"
+#include "nandflash/NF_reg.h"
+*/
+#include "mmp_types.h"
+
+#if defined(MM9910) && defined(__FREERTOS__)
+  //#define ENABLE_MM9910_WISHBONE_BUS
+#endif
+/********************************************
+ * DLL export API declaration for Win32.
+ ********************************************/
+#define DLLAPI     extern 
+
+#ifdef  ENABLE_MM9910_WISHBONE_BUS
+#define DPU_WISHBONE_BASE   0xE0000000
+#endif
+
+//#define ENABLE_PATCH_DPU_DATA_ENDIAN_ISSUE
+
+#ifdef ENABLE_PATCH_DPU_DATA_ENDIAN_ISSUE
+#define ENABLE_HW_REVERSE
+#endif
+//=============================================================================
+//                              DPU Register Definition
+//=============================================================================
+#ifdef  ENABLE_MM9910_WISHBONE_BUS
+#define DPU_CTRL_REG						(DPU_WISHBONE_BASE + 0x00)
+#define DPU_SRC_ADDR_REG					(DPU_WISHBONE_BASE + 0x04)
+#define	DPU_DST_ADDR_REG					(DPU_WISHBONE_BASE + 0x08)
+#define DPU_SRC_SIZE_REG					(DPU_WISHBONE_BASE + 0x0C)
+#define DPU_INT_CONTROLL_REG				(DPU_WISHBONE_BASE + 0x10)
+#define DPU_STATUS_REG						(DPU_WISHBONE_BASE + 0x14)
+
+#define	DPU_CRC32_REG0						(DPU_WISHBONE_BASE + 0x18)
+#define DPU_CRC32_REG1						(DPU_WISHBONE_BASE + 0x1C)
+
+#define DPU_CRC_SLAVE_MODE_DATA_REG			(DPU_WISHBONE_BASE + 0x20)
+#define DPU_RANKEY_NUM_REG					(DPU_WISHBONE_BASE + 0x24)
+#define	DPU_RANKEY_SEED_REG					(DPU_WISHBONE_BASE + 0x28)
+
+#define DPU_KEY0_REG						(DPU_WISHBONE_BASE + 0x2C)
+#define DPU_KEY1_REG						(DPU_WISHBONE_BASE + 0x30)
+#define DPU_KEY2_REG						(DPU_WISHBONE_BASE + 0x34)
+#define	DPU_KEY3_REG						(DPU_WISHBONE_BASE + 0x38)
+#define DPU_KEY4_REG						(DPU_WISHBONE_BASE + 0x3C)
+#define DPU_KEY5_REG						(DPU_WISHBONE_BASE + 0x40)
+
+#define DPU_INIT_VECTOR0_REG				(DPU_WISHBONE_BASE + 0x44)
+#define	DPU_INIT_VECTOR1_REG				(DPU_WISHBONE_BASE + 0x48)
+#define DPU_INIT_VECTOR2_REG				(DPU_WISHBONE_BASE + 0x4C)
+#define DPU_INIT_VECTOR3_REG				(DPU_WISHBONE_BASE + 0x50)
+#define DPU_INIT_SCRAMBLE_REG				(DPU_WISHBONE_BASE + 0x54) 
+#define DPU_SHA_INIT0_REG				    (DPU_WISHBONE_BASE + 0x100) 
+#define DPU_SHA_DST0_REG				    (DPU_WISHBONE_BASE + 0x140) 
+
+#else   //#ifdef  MM9910_WISHBONE_BUS
+    
+#define DPU_CTRL_REG						(DPU_BASE + 0x00)
+#define DPU_SRC_ADDR_REG					(DPU_BASE + 0x04)
+#define	DPU_DST_ADDR_REG					(DPU_BASE + 0x08)
+#define DPU_SRC_SIZE_REG					(DPU_BASE + 0x0C)
+#define DPU_INT_CONTROLL_REG				(DPU_BASE + 0x10)
+#define DPU_STATUS_REG						(DPU_BASE + 0x14)
+
+#define	DPU_CRC32_REG0						(DPU_BASE + 0x18)
+#define DPU_CRC32_REG1						(DPU_BASE + 0x1C)
+
+#define DPU_CRC_SLAVE_MODE_DATA_REG			(DPU_BASE + 0x20)
+#define DPU_RANKEY_NUM_REG					(DPU_BASE + 0x24)
+#define	DPU_RANKEY_SEED_REG					(DPU_BASE + 0x28)
+
+#define DPU_KEY0_REG						(DPU_BASE + 0x2C)
+#define DPU_KEY1_REG						(DPU_BASE + 0x30)
+#define DPU_KEY2_REG						(DPU_BASE + 0x34)
+#define	DPU_KEY3_REG						(DPU_BASE + 0x38)
+#define DPU_KEY4_REG						(DPU_BASE + 0x3C)
+#define DPU_KEY5_REG						(DPU_BASE + 0x40)
+
+#define DPU_INIT_VECTOR0_REG				(DPU_BASE + 0x44)
+#define	DPU_INIT_VECTOR1_REG				(DPU_BASE + 0x48)
+#define DPU_INIT_VECTOR2_REG				(DPU_BASE + 0x4C)
+#define DPU_INIT_VECTOR3_REG				(DPU_BASE + 0x50)
+#define DPU_INIT_SCRAMBLE_REG				(DPU_BASE + 0x54) 
+#define DPU_SHA_INIT0_REG				    (DPU_BASE + 0x100) 
+#define DPU_SHA_DST0_REG				    (DPU_BASE + 0x140) 
+#endif
+
+//=============================================================================
+//                              DPU Register function mask Definition
+//=============================================================================
+//Burst size select
+#define	DPU_BURST_WIDTH_MASK				0x70000000	//(0x07<<28)
+#define	DPU_BURST_WIDTH_8_BIT				0x00000000
+#define	DPU_BURST_WIDTH_16_BIT				0x10000000
+#define	DPU_BURST_WIDTH_32_BIT				0x20000000
+
+//Burst size select
+#define	DPU_BURST_SIZE_MASK					0x07000000	//(0x07<<24)
+#define	DPU_BURST_SIZE_1					0x00000000
+#define	DPU_BURST_SIZE_4					0x01000000
+#define	DPU_BURST_SIZE_8					0x02000000
+#define	DPU_BURST_SIZE_16					0x03000000
+
+//Random key free run
+#define	DPU_RAND_KEY_FREERUN_MASK			0x00100000	//(0x01<<20)
+#define	DPU_SET_RAND_KEY_FREERUN			0x00100000
+#define	DPU_SET_RAND_KEY_DISABLE			0x00000000
+
+//select CRC mode
+#define	CRC_MODE_MASK						0x00080000	//(0x01<<19)
+#define	CRC_SELECT_MASTER					0x00000000
+#define	CRC_SELECT_SLAVE					0x00080000
+
+//select CRC register
+#define	CRC_REG_MASK						0x00040000	//(0x01<<18)
+#define	CRC_SELECT_CRC_REG0					0x00000000
+#define	CRC_SELECT_CRC_REG1					0x00040000
+
+//Data process with CRC
+#define	CRC_PROC_MASK						0x00030000	//(0x03<<16)
+#define	CRC_PROC_USE_CRC_WHEN_DPU_MODE		0x00000000
+#define	CRC_PROC_DATA_FROM_DATAIN			0x00010000
+#define	CRC_PROC_DATA_FROM_DATAOUT			0x00020000
+#define	CRC_PROC_NOT_DEFINE					0x00030000
+
+//select the source of key
+#define	DPU_SRC_OF_INIT_VCTR_MASK			0x0000C000	//(0x03<<14)
+#define	DPU_SET_VECTOR_SRC0					0x00000000
+#define	DPU_SET_VECTOR_SRC1					0x00004000
+#define	DPU_SET_VECTOR_SRC2					0x00008000
+#define	DPU_SET_VECTOR_SRC3					0x0000C000
+
+//select the source of initial vector
+#define	DPU_RAND_KEY_SOURCE_MASK			0x00003000	//(0x03<<12)
+#define	DPU_SET_KEY_SRC0					0x00000000
+#define	DPU_SET_KEY_SRC1					0x00001000
+#define	DPU_SET_KEY_SRC2					0x00002000
+#define	DPU_SET_KEY_SRC3					0x00003000
+
+//DPU cipher mode select
+#define	DPU_CIPHER_MODE_MASK				0x00000700	//(0x07<<8)
+#define	DPU_SET_ECB_MODE					0x00000000
+#define	DPU_SET_CBC_MODE					0x00000100
+#define	DPU_SET_OFB_MODE					0x00000200
+#define	DPU_SET_CFB_MODE					0x00000300
+#define	DPU_SET_CTR_MODE					0x00000400
+
+//DPU mode select
+#define	DPU_MODE_MASK						0x00000070	//(0x07<<4)
+#define	DPU_SET_CRC_MODE					0x00000000
+#define	DPU_SET_AES_MODE					0x00000010
+#define	DPU_SET_CSA_MODE					0x00000020
+#define	DPU_SET_DES_MODE					0x00000030
+#define	DPU_SET_DES3_MODE					0x00000040
+#define	DPU_SET_SCRAMBLE_MODE				0x00000050
+#define	DPU_SET_SHA2_MODE					0x00000060
+
+//DPU endian select
+#define	DPU_SET_ENDIAN_MASK					0x00000008	//(0x01<<3)
+#define	DPU_SET_BIG_ENDIAN					0x00000008
+#define	DPU_SET_LITTLE_ENDIAN				0x00000000
+
+//DPU encode/decide select
+#define	DPU_SET_ENCODE_DECODE_MASK			0x00000004	//(0x01<<2)
+#define	DPU_SET_ENCODE						0x00000004
+#define	DPU_SET_DECODE						0x00000000
+
+
+#define	DPU_INTR_ENABLE_MASK				0x00000001
+#define	DPU_INTR_CLEAR_MASK					0x00000002
+
+#define	NO_CIPHER_MODE						0x00
+#define	ECB_MODE							0x01
+#define	CBC_MODE							0x02
+#define	OFB_MODE							0x03
+#define	CFB_MODE							0x04
+#define	CTR_MODE							0x05
+
+//=============================================================================
+//                              LOG definition
+//=============================================================================
+//#define LOG_ZONES    (MMP_BIT_ALL /*& ~MMP_ZONE_ENTER & ~MMP_ZONE_LEAVE & ~MMP_ZONE_DEBUG & ~MMP_ZONE_INFO*/)
+#define LOG_ZONES    (MMP_BIT_ALL & ~MMP_ZONE_ENTER & ~MMP_ZONE_LEAVE & ~MMP_ZONE_DEBUG /*& ~MMP_ZONE_INFO*/)
+//#define LOG_ZONES     0
+
+#define LOG_ERROR   ((void) ((MMP_ZONE_ERROR & LOG_ZONES) ? (printf("[SMEDIA][DPU][ERROR]"
+#define LOG_WARNING ((void) ((MMP_ZONE_WARNING & LOG_ZONES) ? (printf("[SMEDIA][DPU][WARNING]"
+#define LOG_INFO    ((void) ((MMP_ZONE_INFO & LOG_ZONES) ? (printf("[SMEDIA][DPU][INFO]"
+#define LOG_DEBUG   ((void) ((MMP_ZONE_DEBUG & LOG_ZONES) ? (printf("[SMEDIA][DPU][DEBUG]"
+#define LOG_ENTER   ((void) ((MMP_ZONE_ENTER & LOG_ZONES) ? (printf("[SMEDIA][DPU][ENTER]"
+#define LOG_LEAVE   ((void) ((MMP_ZONE_LEAVE & LOG_ZONES) ? (printf("[SMEDIA][DPU][LEAVE]"
+#define LOG_DATA    ((void) ((MMP_FALSE) ? (printf(
+#define LOG_END     )), 1 : 0));
+
+//=============================================================================
+//                              Constant Definition
+//=============================================================================
+
+#define DPU_FIRE_BIT	0x00000002
+#define DPU_RESET_BIT	0x00000001
+
+
+#define MAX_KEY_NUM			(8) 
+#define MAX_VECTOR_NUM		(4)
+#define MAX_DPU_MODE_NUM	(20)
+
+
+#define AES_ECB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_FREERUN | CRC_PROC_DATA_FROM_DATAIN |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_AES_MODE | DPU_SET_ECB_MODE)
+#define AES_CBC_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_FREERUN | CRC_PROC_DATA_FROM_DATAIN |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_AES_MODE | DPU_SET_CBC_MODE)
+#define AES_OFB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_FREERUN | CRC_PROC_DATA_FROM_DATAIN |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_AES_MODE | DPU_SET_OFB_MODE)
+#define AES_CFB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_FREERUN | CRC_PROC_DATA_FROM_DATAIN |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_AES_MODE | DPU_SET_CFB_MODE)
+#define AES_CTR_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_FREERUN | CRC_PROC_DATA_FROM_DATAIN |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_AES_MODE | DPU_SET_CTR_MODE)
+
+#define DES_ECB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES_MODE | DPU_SET_ECB_MODE)
+#define DES_CBC_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES_MODE | DPU_SET_CBC_MODE)
+#define DES_OFB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES_MODE | DPU_SET_OFB_MODE)
+#define DES_CFB_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES_MODE | DPU_SET_CFB_MODE)
+#define DES_CTR_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES_MODE | DPU_SET_CTR_MODE)
+
+#define DES3_ECB_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES3_MODE | DPU_SET_ECB_MODE)
+#define DES3_CBC_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES3_MODE | DPU_SET_CBC_MODE)
+#define DES3_OFB_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES3_MODE | DPU_SET_OFB_MODE)
+#define DES3_CFB_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES3_MODE | DPU_SET_CFB_MODE)
+#define DES3_CTR_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_DES3_MODE | DPU_SET_CTR_MODE)
+
+#define CSA_CTRL_INIT_VALUE			(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_CSA_MODE)
+#define CRC_CTRL_INIT_VALUE			(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC1 | DPU_SET_KEY_SRC1 | DPU_SET_CRC_MODE)
+#define SHA2_CTRL_INIT_VALUE		(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC0 | DPU_SET_KEY_SRC0 | DPU_SET_SHA2_MODE)
+#define SCRAMBLE_CTRL_INIT_VALUE	(DPU_BURST_WIDTH_32_BIT | DPU_BURST_SIZE_8 | DPU_SET_RAND_KEY_DISABLE | CRC_PROC_USE_CRC_WHEN_DPU_MODE |DPU_SET_LITTLE_ENDIAN |DPU_SET_VECTOR_SRC0 | DPU_SET_KEY_SRC0 | DPU_SET_SCRAMBLE_MODE)
+
+#define	CTRL_REG_INIT_MASK			(DPU_BURST_WIDTH_MASK | DPU_BURST_SIZE_MASK | DPU_SET_ENDIAN_MASK | CRC_REG_MASK | CRC_PROC_MASK | CRC_MODE_MASK)
+
+
+#define	KEY_LENTGH_NO_KEY		(0)
+#define	KEY_LENTGH_64_BIT		(2)
+#define	KEY_LENTGH_128_BIT		(4)
+#define	KEY_LENTGH_3X64_BIT		(6)
+
+#define	VECTOR_LENTGH_NO_VECTOR		(0)
+#define	VECTOR_LENTGH_2_VECTORS		(2)
+#define	VECTOR_LENTGH_4_VECTORS		(4)
+#define	VECTOR_LENTGH_6_VECTORS		(6)
+
+//=============================================================================
+//                              Structure Definition
+//============================================================================= 
+typedef enum
+{
+	AES_ECB_MODE=0,
+	AES_CBC_MODE,
+	AES_OFB_MODE,
+	AES_CFB_MODE,
+	AES_CTR_MODE,
+	DES_ECB_MODE,
+	DES_CBC_MODE,
+	DES_OFB_MODE,
+	DES_CFB_MODE,
+	DES_CTR_MODE,
+	DES3_ECB_MODE,
+	DES3_CBC_MODE,
+	DES3_OFB_MODE,
+	DES3_CFB_MODE,
+	DES3_CTR_MODE,
+	CSA_MODE,
+	CRC_MODE,
+	SHA2_MODE,
+	SCRAMBLE_MODE,
+	UNKOWN_MODE
+}DPU_MODE;
+
+typedef struct
+{
+    DPU_MODE	DpuMode;
+    MMP_UINT8	CipherMode;
+    MMP_UINT8	Keylength;
+	MMP_UINT8	Vectorlength;
+	MMP_UINT32	CtrlRegInitial;
+	MMP_UINT32	SrcAddress;
+	MMP_UINT32	DstAddress;
+	MMP_UINT32	DataSize;
+	MMP_UINT32	*RefKeyAddress;
+	MMP_UINT32	*Vectors;
+}DPU_CONTEXT;
+
+typedef struct
+{
+	MMP_UINT8 *InBuf;
+	MMP_UINT8 *OutBuf;
+	MMP_UINT8 *Key;
+	MMP_UINT8 *iv;
+	MMP_UINT32 SwEncSize;
+	DPU_MODE	DpuMode;
+}SW_ENC_INFO;
+
+//=============================================================================
+//                              Enumeration Type Definition 
+//=============================================================================
+/*
+typedef enum
+{
+    AMIC_A25L032,
+    ATMEL_AT26DF161,
+    ATMEL_AT26D321,
+     WIN_W25Q64BV,
+    UNKNOW_VENDOR = 0xFFFF
+}NOR_VENDOR_ID;
+*/
+
+//=============================================================================
+//                              Function Declaration
+//=============================================================================
+DLLAPI MMP_RESULT	mmpDpuInitialize(void);
+DLLAPI MMP_RESULT	mmpDpuTerminate(void);
+DLLAPI MMP_RESULT	mmpDpuEncode(DPU_CONTEXT *DpuContext);
+DLLAPI MMP_RESULT	mmpLoadAhbCode(void);
+DLLAPI MMP_RESULT	mmpLoadWishoneCode(void);
+DLLAPI void         mmpDpuGenerateRandomData(MMP_UINT8* pBuffer, MMP_UINT32 dataSize);
+DLLAPI void         mmpDpuSetRandomKeyGenerateRule(MMP_BOOL bFreerun);
+#endif

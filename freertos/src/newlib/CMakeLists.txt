@@ -1,0 +1,25 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+ADD_LIBRARY(newlib
+    close.c
+    environ.c
+    execve.c
+    fork.c
+    fstat.c
+    getpid.c
+    isatty.c
+    kill.c
+    link.c
+    lseek.c
+    mtrace.c
+    open.c
+    read.c
+    sbrk.c
+    stat.c
+    times.c
+    unlink.c
+    wait.c
+    write.c
+    )
+

@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libor32.a  CMakeFiles/or32.dir/or32_init.c.obj CMakeFiles/or32.dir/or32_isr.c.obj CMakeFiles/or32.dir/or32_sys.c.obj CMakeFiles/or32.dir/or32_uart.c.obj CMakeFiles/or32.dir/or32_stdio.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libor32.a

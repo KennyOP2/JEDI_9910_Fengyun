@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libmmp.a  CMakeFiles/mmp.dir/ahb.c.obj CMakeFiles/mmp.dir/clock.c.obj CMakeFiles/mmp.dir/gpio.c.obj CMakeFiles/mmp.dir/host.c.obj CMakeFiles/mmp.dir/mem.c.obj CMakeFiles/mmp.dir/sys.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libmmp.a

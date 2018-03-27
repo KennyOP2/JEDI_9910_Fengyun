@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libdma.a  CMakeFiles/dma.dir/mmp_dma.c.obj CMakeFiles/dma.dir/dma.c.obj CMakeFiles/dma.dir/dma_hw.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libdma.a

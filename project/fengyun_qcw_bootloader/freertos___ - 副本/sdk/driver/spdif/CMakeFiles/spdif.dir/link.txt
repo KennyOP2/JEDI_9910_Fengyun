@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libspdif.a  CMakeFiles/spdif.dir/mmp_spdif.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libspdif.a

@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libtimer.a  CMakeFiles/timer.dir/mmp_timer.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libtimer.a

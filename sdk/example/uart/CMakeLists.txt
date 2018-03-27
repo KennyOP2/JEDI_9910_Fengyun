@@ -1,0 +1,59 @@
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+    SET(EXAMPLE_LINK_LIBS
+        winmm
+        )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    SET(EXAMPLE_LINK_DIRS
+        ${PROJECT_BINARY_DIR}/${SMEDIA_PLATFORM}
+        )
+    SET(EXAMPLE_LINK_LIBS
+        ${SMEDIA_PLATFORM}
+        )
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)
+
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+
+ADD_EXECUTABLE(uarttest
+    main.c
+    )
+
+LINK_DIRECTORIES(
+    ${PROJECT_BINARY_DIR}/pal
+    ${PROJECT_BINARY_DIR}/mmp
+    ${EXAMPLE_LINK_DIRS}
+    )
+
+IF(${SMEDIA_PLATFORM} STREQUAL win32)
+TARGET_LINK_LIBRARIES(uarttest
+    pal
+    ${SMEDIA_FAT_LIB}
+    uart
+    dma
+    #intr
+    mmp
+    ${EXAMPLE_LINK_LIBS}
+    )
+ELSEIF(${SMEDIA_PLATFORM} STREQUAL freertos)
+TARGET_LINK_LIBRARIES(uarttest
+    pal
+    ${SMEDIA_FAT_LIB}
+    uart
+    dma
+    intr
+    mmp
+    ${EXAMPLE_LINK_LIBS}
+    )    
+ENDIF(${SMEDIA_PLATFORM} STREQUAL win32)    
+
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+    ADD_CUSTOM_COMMAND(
+        TARGET uarttest
+        POST_BUILD
+        COMMAND ${CMAKE_OBJCOPY}
+            -O binary ${CMAKE_CURRENT_BINARY_DIR}/uarttest ${CMAKE_CURRENT_BINARY_DIR}/uarttest.bin
+        )
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)

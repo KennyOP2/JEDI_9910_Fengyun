@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/librtc.a  CMakeFiles/rtc.dir/mmp_rtc.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/librtc.a

@@ -1,0 +1,12 @@
+INCLUDE_DIRECTORIES(
+    ${SMEDIA_INC_DIRS}
+    )
+ADD_LIBRARY(freertos
+    croutine.c
+    list.c
+    queue.c
+    port.c
+    tasks.c
+    timer.c
+    heap_4.c
+    )

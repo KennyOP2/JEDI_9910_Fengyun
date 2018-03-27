@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libspi.a  CMakeFiles/spi.dir/mmp_spi.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libspi.a

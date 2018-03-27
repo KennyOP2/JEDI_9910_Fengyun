@@ -1,0 +1,2 @@
+C:/ITEGCC/bin/sm32-elf-ar.exe cq ../../../lib/libaud.a  CMakeFiles/aud.dir/audio.c.obj
+C:/ITEGCC/bin/sm32-elf-ranlib.exe ../../../lib/libaud.a

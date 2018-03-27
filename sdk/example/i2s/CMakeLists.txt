@@ -1,0 +1,48 @@
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+	SET(EXAMPLE_LINK_DIRS
+		${PROJECT_BINARY_DIR}/${SMEDIA_PLATFORM}
+		)
+	SET(EXAMPLE_LINK_LIBS
+		${SMEDIA_PLATFORM}
+		)
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+
+INCLUDE_DIRECTORIES(
+	${SMEDIA_INC_DIRS}
+	${CMAKE_CURRENT_SOURCE_DIR}
+	)
+
+ADD_EXECUTABLE(test_i2s
+	test_freertos.c
+#	test_i2s_cirrus_adc.c
+#	test_i2s_cirrus_adc_with_wolfson_dac.c
+#	test_i2s_wolfson_dac.c
+	test_i2s_spdif.c
+	)
+
+LINK_DIRECTORIES(
+	${PROJECT_BINARY_DIR}/pal
+	${PROJECT_BINARY_DIR}/mmp
+	${EXAMPLE_LINK_DIRS}
+	)
+
+TARGET_LINK_LIBRARIES(test_i2s
+	pal
+	fat
+	i2s
+	iic
+	dma
+	mmp
+	${EXAMPLE_LINK_LIBS}
+	)
+
+IF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+	ADD_CUSTOM_COMMAND(
+		TARGET test_i2s
+		POST_BUILD
+		COMMAND ${CMAKE_OBJCOPY}
+			-O binary ${CMAKE_CURRENT_BINARY_DIR}/test_i2s ${CMAKE_CURRENT_BINARY_DIR}/test_i2s.bin
+		)
+
+ENDIF(${SMEDIA_PLATFORM} STREQUAL freertos OR ${SMEDIA_PLATFORM} STREQUAL openrtos)
+
